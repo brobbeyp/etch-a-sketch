@@ -1,6 +1,6 @@
 
-const createDivs = (row) => {
-    for (let x = 0; x < 16; x++) {
+const createDivs = (row, squaresPerSide) => {
+    for (let x = 0; x < squaresPerSide; x++) {
         let div = document.createElement('div');
         row.appendChild(div);
         div['id'] = `${x+1},${row.id}` ; // the divs position in the grid (x,y)
@@ -10,31 +10,67 @@ const createDivs = (row) => {
     }
 };
 
-const createGrid = (container) => {
-    for (let y = 0; y < 16; y++) {
+const createGrid = (container, squaresPerSide) => {
+    for (let y = 0; y < squaresPerSide; y++) {
         let row = document.createElement('div');
         row['id'] = `${y+1}`;
-        createDivs(row);
+        createDivs(row, squaresPerSide);
         row.classList.add('gridRow');
         container.appendChild(row); 
     }
 
 }
 
-const main = () => {
-    const gridContainer = document.querySelector('#gridContainer');
-    createGrid(gridContainer);
-};
-
-main()
-
-// Select and add hover event listener to every gridSquare class
-
-const squares = document.querySelectorAll('.gridSquare');
-
 const changeColor = (e) => {
     e.target.style.backgroundColor = 'black';
+};
+
+const promptSquaresPerSide = () => {
+    let squaresPerSide = Number.parseInt(prompt('Please enter a number of squares per side (between 2 and 100): ',
+                                '16'));
+    if (squaresPerSide < 2) {
+        squaresPerSide = 16;
+    } else if (squaresPerSide > 100) {
+        squaresPerSide = 100
+    }
+    return (squaresPerSide);
+    
+};
+
+const clearGrid = () => {
+    gridContainer.innerHTML = ''
+};
+
+const drawGridFromPrompt = () => {
+    const squaresPerSide = promptSquaresPerSide();
+    clearGrid();
+    createGrid(gridContainer,squaresPerSide);
+    addSquareEventListeners();
 }
 
+const addSquareEventListeners = () => {
+    let squares = document.querySelectorAll('.gridSquare');
+    squares.forEach(square => square.addEventListener('mouseover', changeColor));
+}
 
-squares.forEach(square => square.addEventListener('mouseover', changeColor))
+const addButtonEventListener = () => {
+    let button = document.querySelector('#resetButton');
+    button.addEventListener('click', drawGridFromPrompt);
+}
+
+const main = () => {
+    // init gridContainer
+    const gridContainer = document.querySelector('#gridContainer');
+    createGrid(gridContainer, 16);
+    addSquareEventListeners();
+    addButtonEventListener();
+};
+
+main();
+
+
+
+
+
+
+
