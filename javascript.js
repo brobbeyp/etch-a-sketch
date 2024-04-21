@@ -21,8 +21,19 @@ const createGrid = (container, squaresPerSide) => {
 
 }
 
+const randomRGB = () => {
+    let r = Math.floor((Math.random() * 255))
+    let g = Math.floor((Math.random() * 255))
+    let b = Math.floor((Math.random() * 255))
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 const changeColor = (e) => {
-    e.target.style.backgroundColor = 'black';
+    e.target.style.backgroundColor = randomRGB();
+    if (e.target.style.opacity <= .9) {
+        e.target.style.opacity = +e.target.style.opacity + .1;
+    }
+    
 };
 
 const promptSquaresPerSide = () => {
@@ -57,6 +68,8 @@ const addButtonEventListener = () => {
     let button = document.querySelector('#resetButton');
     button.addEventListener('click', drawGridFromPrompt);
 }
+
+
 
 const main = () => {
     // init gridContainer
