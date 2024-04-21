@@ -1,15 +1,25 @@
 
-const createDivs = () => {
-    for (let i = 0; i < 16; i++) {
+const createDivs = (row) => {
+    for (let x = 0; x < 16; x++) {
         let div = document.createElement('div');
-        div['id'] = `square-${i+1}`;
-        gridContainer.appendChild(div);
+        row.appendChild(div);
+        div['id'] = `${row.id},${x+1}` ;
     }
 };
 
+const createGrid = (container) => {
+    for (let y = 0; y < 16; y++) {
+        let row = document.createElement('div');
+        row['id'] = `${y+1}`;
+        createDivs(row);
+        container.appendChild(row) 
+    }
+
+}
+
 const main = () => {
     const gridContainer = document.querySelector('#gridContainer');
-    createDivs();
+    createGrid(gridContainer);
 };
 
 main()
