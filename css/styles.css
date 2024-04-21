@@ -25,11 +25,11 @@ body {
 }
 
 #gridContainer {
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     background-color: black;
     flex-direction: column;
-    padding: 10px
+    border: 1px solid black;
 
 
 }
@@ -37,13 +37,13 @@ body {
 .gridRow {
     min-height: 6.25%;
     background-color: aliceblue;
-    border: 3px dotted black;
-    gap: 6px;
+    /* border: 3px dotted black; */
+    /* gap: 6px; */
 
 }
 
 .gridSquare {
     flex: auto;
-    border: 3px solid black;
+    border: 1px solid black;
     
 }
