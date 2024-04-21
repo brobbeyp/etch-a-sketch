@@ -27,3 +27,14 @@ const main = () => {
 };
 
 main()
+
+// Select and add hover event listener to every gridSquare class
+
+const squares = document.querySelectorAll('.gridSquare');
+
+const changeColor = (e) => {
+    e.target.style.backgroundColor = 'black';
+}
+
+
+squares.forEach(square => square.addEventListener('mouseover', changeColor))
