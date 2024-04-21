@@ -4,6 +4,8 @@ const createDivs = (row) => {
         let div = document.createElement('div');
         row.appendChild(div);
         div['id'] = `${row.id},${x+1}` ;
+        div.setAttribute('data-x',`${x+1}`);
+        div.setAttribute('data-y',`${row.id}`);
     }
 };
 
